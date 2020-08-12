@@ -68,4 +68,8 @@ npm install "Path-to-your-Exercise-Folder" (something like ../Exercise)
 7) Inside the tracker directory, run:
 npm pack
 
-then LOOK at the package.json file (cat package.json) and look at how 
+then LOOK at the package.json file (cat package.json) and look at how npm
+has updated the "dependencies" member for us.  You can go in and change the
+version number to 0.1.3 if you'd like
+
+8) Last, go update the driver to use the new version
