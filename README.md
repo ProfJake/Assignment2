@@ -60,4 +60,12 @@ npm install "Path-to-your-Exercise-Folder" (something like ../Exercise)
    	    this.exercise = new Exercise(exercise);
    This should automatically assign the exercise and calculate method.
 
+   You should leave the try catch statement alone.
+   
    c) you can remove the local definitions for walking and running.
+
+   d) save and exit
+7) Inside the tracker directory, run:
+npm pack
+
+then LOOK at the package.json file (cat package.json) and look at how 
