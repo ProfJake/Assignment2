@@ -66,10 +66,7 @@ var running  = function(){
     return 0.63 * weight * distance;
     }
 };
-//LAB ACTIVITY: I'd like you to improve the modularity of this code and get
-//used to pre-ES6 syntax.  Create a file for defining an "Exercise" called
-//Exercise.js.  Create a prototype for an Exercise, using the calculate
-//function as defined above.  Export both running and 
+
 
 //This is the Class Prototype.  It is the "old" way of defining a JavaScript
 //Class.  It essentially provides functionality to all instances of tracker()
@@ -92,10 +89,10 @@ tracker.prototype={
 
 //Export statements expose data we want to be "importable". In this case
 //I want to export the tracker class (including its prototypes).  I don't
-//want to export the function objects because they are for internal use only.
-//They are assigned at creation.  They are analogous to inner classes.
+//want to export the function objects from here because they are for
+//internal use only.  They are analogous to inner classes in this scenario.
 
-//Note that for improved modularity, I could have also defined the
-//exercise formulas in a separate file and exported them.  Then imported them
-//into this file.  I may choose that route in future iterations of the program.
 module.exports = tracker;
+
+//Your Lab assignment will be to further modularize this code and move most
+//of the exercise specific stuff into an Exercise module.
