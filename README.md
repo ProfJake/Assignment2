@@ -36,6 +36,10 @@ DIRECTIONS:
     This is basically a copy of  the if/else Statement in trackerService.js
     with a few modifications.
 
+    Note the hierarchical structure of the thrown error.  You can add different
+    log statements in each catch to help determine sources of errors when
+    debugging.
+
     c) create an Object prototype for this module.  the prototype is simple,
     it should have a calculate function that accepts "weight" and "distance"
     parameters and returns the value of running the specific exercise's
@@ -72,4 +76,10 @@ then LOOK at the package.json file (cat package.json) and look at how npm
 has updated the "dependencies" member for us.  You can go in and change the
 version number to 0.1.3 if you'd like
 
-8) Last, go update the driver to use the new version
+8) Lastly, go into the ActivityTracker folder and run:
+npm install "Path_to_your_tracker_folder"
+
+check to make sure it all works by running:
+node activityTracker.js
+
+
