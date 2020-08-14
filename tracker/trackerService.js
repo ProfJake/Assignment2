@@ -10,7 +10,7 @@ Activities:  Walk/Run
 Input:  Exercise type
         Distance (miles)
         Weight (lbs)
-        Time (hours)
+        Time (minutes)
 Output: Calories Burned
 
  Formula Sources:
@@ -82,7 +82,7 @@ tracker.prototype={
     
     //speed is consistently calculated for all exercise times (distance/time)
     calcSpeed: function(){
-	return this.distance/this.time;
+	return this.distance/(this.time/60); //returns in miles per hour
     }
 
 };

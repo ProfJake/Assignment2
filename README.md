@@ -93,14 +93,17 @@ and we abstracted/encapsulated the things that can change.  We can add as many
 trackerService file. Now Exercises can be "plugged in" elsewhere, if we need
 them.
 
-9) Now adding more types of activities is super easy! Currently the driver
+9) Now adding more types of activities is relatively easy. Currently the driver
 does not recognize "swimming". All we need is an else if branch in the
 exercise constructor, and a new Function Object for the appropriate calculation
 to fix this.
 
-Add a function Object named "swimming" using the following formula:
+Add a function Object named "swimming" the following formula:
 
 calories burned = (6 * Weight in KG * 3.5) / 200;
+
+However, there is a slight problem. This formula only provides CALORIES BURNED
+PER MINUTE not total calories.  To get the data we want	       
 
 NOTE: the formula requires weight in kg but the array of Object literals in
 activityTracker.js provides weight in pounds.  1 kg = 2.2 pounds, for the
