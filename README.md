@@ -76,10 +76,35 @@ then LOOK at the package.json file (cat package.json) and look at how npm
 has updated the "dependencies" member for us.  You can go in and change the
 version number to 0.1.3 if you'd like
 
-8) Lastly, go into the ActivityTracker folder and run:
+8) Go into the ActivityTracker folder and run:
 npm install "Path_to_your_tracker_folder"
 
 check to make sure it all works by running:
 node activityTracker.js
 
+As long as it works then you're basically done.  If it doesn't work, you may
+have to review these steps to make sure you've done everything here.
 
+By modularizing the Exercises, we've made it much easier to reuse them (DRY),
+made it easy to add more (extension) of them (open/closed), separated the
+functionality of the tracker from the functionality of the calculation (SRP),
+and we abstracted/encapsulated the things that can change.  We can add as many
+"Exercises" to the program as we'd like, without ever having to change the
+trackerService file. Now Exercises can be "plugged in" elsewhere, if we need
+them.
+
+9) Now adding more types of activities is super easy! Currently the driver
+does not recognize "swimming". All we need is an else if branch in the
+exercise constructor, and a new Function Object for the appropriate calculation
+to fix this.
+
+Add a function Object named "swimming" using the following formula:
+
+calories burned = (6 * Weight in KG * 3.5) / 200;
+
+NOTE: the formula requires weight in kg but the array of Object literals in
+activityTracker.js provides weight in pounds.  1 kg = 2.2 pounds, for the
+purposes of this exercise.
+
+Don't forget to repack Exercise and reinstall it in the tracker folder
+after updating it.
