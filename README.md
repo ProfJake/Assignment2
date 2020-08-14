@@ -103,11 +103,25 @@ Add a function Object named "swimming" the following formula:
 calories burned = (6 * Weight in KG * 3.5) / 200;
 
 However, there is a slight problem. This formula only provides CALORIES BURNED
-PER MINUTE not total calories.  To get the data we want	       
+PER MINUTE not total calories, unlike the other two formulae.
+To get the data we want, we need the time.
+
+Since we also need all exercise function signatures to match, that means you
+need all of them to accept three parameters (weight, distance, time).
+In scenarios like this, it's ok to accept parameters that you will ignore.
+
+So walking and running now need a time parameter at the end of their signatures
+No need to change their calculations.  And swimming should have matching
+signature. In the swimming calculation, you can ignore distance parameter and
+return total calories using time and the given formula.
+
+We can add other types of exercise similarly, though we won't always
+need to add a new parameter; the formula for swimming just happened to need
+something more.
+
 
 NOTE: the formula requires weight in kg but the array of Object literals in
 activityTracker.js provides weight in pounds.  1 kg = 2.2 pounds, for the
 purposes of this exercise.
 
-Don't forget to repack Exercise and reinstall it in the tracker folder
-after updating it.
+Don't forget to update your package.json files
