@@ -1,8 +1,8 @@
 {
     "author": "Jake Levy",
     "name": "tracker",
-    "version": "0.1.2",
-    "description": "our second NPM module",
+    "version": "0.1.2B",
+    "description": "our second NPM module in ES6",
     "main": "trackerService",
     "dependencies": {},
     "engines": {

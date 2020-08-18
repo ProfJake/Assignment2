@@ -22,45 +22,35 @@ Output: Calories Burned
 //requires weight in lbs
 //Time in hours
 //distance in miles
-//Constructor for the tracker Class.
-
-class tracker{
-    constructor(exercise, weight, distance, time) {
-	try{
-	    if (exercise == "walking"){
-		this.exercise = new walking(); //exercise is a new instance of
-	        //of the function objects below
-	    } else if (exercise == "running") {
-		this.exercise = new running();
-	    } else {
-		//throwing errors is as simply as throwing an object literal
-		//with a message property.
-		throw { message: "Unknown exercise!"}; //if the exercise is unknown
-	    }
-	    
-	    //Note that, like constructors in Java/C++, nothing is being returned
-	    //from the constructor.  But we have to use keyword this to indicate
-	    //that we are createing an object here.
-	    this.weight = Number(weight);
-	    this.distance = Number(distance);
-	    this.time = Number(time);
-	    
-	    //catch any error thrown in object creation and re-throw it to
-	    //calling module.
-	} catch (err){
-	    console.log("Error recieved during object creation");
-	    throw err;
+//Constructor for the tracker Class.  
+var tracker = function(exercise, weight, distance, time) {
+    try{
+	if (exercise == "walking"){
+	    this.exercise = new walking(); //exercise is a new instance of
+	                                  //of the function objects below
+	} else if (exercise == "running") {
+	    this.exercise = new running();
+	} else {
+	    //throwing errors is as simply as throwing an object literal
+	    //with a message property.
+	    throw { message: "Unknown exercise!"}; //if the exercise is unknown
 	}
-    }
 
-    calculate(){
-	return this.exercise.calculate(this.weight, this.distance);
-    }
+	//Note that, like constructors in Java/C++, nothing is being returned
+	//from the constructor.  But we have to use keyword this to indicate
+	//that we are createing an object here.
+	this.weight = Number(weight);
+	this.distance = Number(distance);
+	this.time = Number(time);
 
-    calcSpeed(){
-	return this.distance/(this.time/60); //returns in miles per hour
+	//catch any error thrown in object creation and re-throw it to
+	//calling module.
+    } catch (err){
+	console.log("Error recieved during object creation");
+	throw err;
     }
-}
+};
+
 
 //This calorie calculations for  walking and running are
 //implemented as Function Objects.  These can be assigned
@@ -82,7 +72,7 @@ var running  = function(){
 //Class.  It essentially provides functionality to all instances of tracker()
 //Note how this is defined like a JSON object (Parameter Name:  value). All JS
 //objects at their core, are basically JSON (obviously)
-/*tracker.prototype={    
+tracker.prototype={    
 
 
     //runs the exercise specific calculation on internal variables
@@ -96,7 +86,7 @@ var running  = function(){
     }
 
 };
-*/
+
 //Export statements expose data we want to be "importable". In this case
 //I want to export the tracker class (including its prototypes).  I don't
 //want to export the function objects from here because they are for
