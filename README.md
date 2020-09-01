@@ -46,23 +46,26 @@ DIRECTIONS:
     calculate function.
 4)  Now you must make this into an NPM module.  Inside Exercise folder, run:
 
-npm pack
+    npm pack
 
 5) Move into the tracker folder and run:
 
-npm install "Path-to-your-Exercise-Folder" (something like ../Exercise)
+    npm install "Path-to-your-Exercise-Folder" (something like ../Exercise)
 
 6) Inside the trackerService file:
 
    a) At the top, import the Exercise folder:
-   var Exercise = require("Exercise");
+
+    var Exercise = require("Exercise");
    //if you don't npm install it, then you need to include the path to Exercise
 
    b) In the constructor, get rid of the redundant if/else construct (it should
    already be inside Exercise).  Instead, just set this.exercise to a new
    instance of Exercise(type).  
-   	    this.exercise = new Exercise(exercise);
-   This should automatically assign the exercise and calculate method.
+
+    this.exercise = new Exercise(exercise);
+
+This should automatically assign the exercise and calculate method.
 
    You should leave the try catch statement alone.
    
@@ -70,17 +73,20 @@ npm install "Path-to-your-Exercise-Folder" (something like ../Exercise)
 
    d) save and exit
 7) Inside the tracker directory, run:
-npm pack
+
+    npm pack
 
 then LOOK at the package.json file (cat package.json) and look at how npm
 has updated the "dependencies" member for us.  You can go in and change the
 version number to 0.1.3 if you'd like
 
 8) Go into the ActivityTracker folder and run:
-npm install "Path_to_your_tracker_folder"
+
+    npm install "Path_to_your_tracker_folder"
 
 check to make sure it all works by running:
-node activityTracker.js
+
+    node activityTracker.js
 
 As long as it works then you're basically done.  If it doesn't work, you may
 have to review these steps to make sure you've done everything here.
@@ -100,7 +106,7 @@ to fix this.
 
 Add a function Object named "swimming" the following formula:
 
-calories burned = (6 * Weight in KG * 3.5) / 200;
+    calories burned = (6 * Weight in KG * 3.5) / 200;
 
 However, there is a slight problem. This formula only provides CALORIES BURNED
 PER MINUTE not total calories, unlike the other two formulae.
