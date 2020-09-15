@@ -47,6 +47,7 @@ DIRECTIONS:
 
 4)  Now you must make this into an NPM module.  Inside Exercise folder, run:
 
+    npm init (you can use the default info to create a package.json file)
     npm pack
 
 5) Move into the tracker folder and run:
@@ -82,11 +83,11 @@ version number to 0.1.3 if you'd like
 
 8) Go into the ActivityTracker folder and run:
 
-    npm install "Path_to_your_tracker_folder"
+    npm install "Path_to_your_tracker_folder" (the actual path on your system)
 
 check to make sure it all works by running:
 
-    node activityTracker.js
+    node activityTracker.js  (from the ActivityTracker folder, in the terminal)
 
 As long as it works then you're basically done.  If it doesn't work, you may
 have to review these steps to make sure you've done everything here.
