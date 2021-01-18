@@ -1,7 +1,14 @@
-LAB ACTIVITY 2
+**LAB ACTIVITY 2**
 
-Today we looked at how to prototype and export modules/classes in Node,
-focusing on using Pre-ES6 syntax.  This activity will ask you to practice this.
+Today we looked at how to define and export objects in NodeJS.  We covered
+basic syntax for both ES5- and ES6+ code.  While we covered ES5 (and I have
+provided a version of this assignment in ES5), you will most likely want to
+use ES6-style syntax.  It is the modern standard and is best practice for
+writing any future projects.  If you missed the lecture for whatever reason,
+go back and get the notes from a fellow student or watch the lecture video
+(if there is one available).
+
+
 
 The improvements made to the trackerService are good.  But the problem is we
 are not strictly following good OO design here.  The Strategy pattern

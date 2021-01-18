@@ -1,11 +1,7 @@
 /*trackerService.js
 
 Provides Activity Tracker Functionality utilizing Strategy Design Pattern.
-Note that this file uses pre-ES6/prototyping syntax for defining a class.
- While ES6 is a bit more firendly to people coming from Java and C++ and
- other Class-based OO languages, this syntax is still valid and you *will*
-see it in the wild. And it should not scare you when you do. 
-
+Note that this file uses ES6 syntax for defining a class.
 Activities:  Walk/Run
 Input:  Exercise type
         Distance (miles)
@@ -19,28 +15,24 @@ Output: Calories Burned
  https://lovandy.com/wellness/physical/calories-burned-running.html
 */
 
-//requires weight in lbs
-//Time in hours
-//distance in miles
-//Constructor for the tracker Class.
 
 class tracker{
     constructor(exercise, weight, distance, time) {
 	try{
-	    if (exercise == "walking"){
+	    if (exercise.toString().toLowerCase() == "walking"){
 		this.exercise = new walking(); //exercise is a new instance of
 	        //of the function objects below
-	    } else if (exercise == "running") {
+	    } else if (exercise.toString.toLowerCase() == "running") {
 		this.exercise = new running();
 	    } else {
 		//throwing errors is as simply as throwing an object literal
 		//with a message property.
 		throw { message: "Unknown exercise!"}; //if the exercise is unknown
 	    }
-	    
-	    //Note that, like constructors in Java/C++, nothing is being returned
-	    //from the constructor.  But we have to use keyword this to indicate
-	    //that we are createing an object here.
+
+ //Note that, like constructors in Java/C++, nothing is being returned
+ //from the constructor. We have to use keyword this to differentiate
+//between a property of the object that is being created and a value passed in
 	    this.weight = Number(weight);
 	    this.distance = Number(distance);
 	    this.time = Number(time);
@@ -78,29 +70,10 @@ var running  = function(){
 };
 
 
-//This is the Class Prototype.  It is the "old" way of defining a JavaScript
-//Class.  It essentially provides functionality to all instances of tracker()
-//Note how this is defined like a JSON object (Parameter Name:  value). All JS
-//objects at their core, are basically JSON (obviously)
-/*tracker.prototype={    
-
-
-    //runs the exercise specific calculation on internal variables
-    calculate: function() {
-	return this.exercise.calculate(this.weight, this.distance);
-    },
-    
-    //speed is consistently calculated for all exercise times (distance/time)
-    calcSpeed: function(){
-	return this.distance/(this.time/60); //returns in miles per hour
-    }
-
-};
-*/
 //Export statements expose data we want to be "importable". In this case
 //I want to export the tracker class (including its prototypes).  I don't
-//want to export the function objects from here because they are for
-//internal use only.  They are analogous to inner classes in this scenario.
+//want to export the function objects (walking and running) from here because
+//they are for internal use only.  
 
 module.exports = tracker;
 
