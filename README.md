@@ -68,7 +68,7 @@ Exercise.js.  This will help you understand how npm works*
     *a) Copy the definitions for the exercise objects from trackerService.js
     (lines 60-70, inclusive) into Exercise.js*
     
-    *b) create a tracker Class definition with a  constructor that accepts a
+    *b) create an Exercise class definition with a  constructor that accepts a
     single parameter (see simpleObjects.js for an example).  This parameter
     will be a String.*
     **Note** this is separate from the exercise objects placed in this file  
