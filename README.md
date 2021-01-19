@@ -1,126 +1,197 @@
-LAB ACTIVITY 2
+**LAB ACTIVITY 2**
 
-Today we looked at how to prototype and export modules/classes in Node,
-focusing on using Pre-ES6 syntax.  This activity will ask you to practice this.
+Today we looked at how to define and export objects in NodeJS.  We covered
+basic syntax for both ES5- and ES6+ code.  While we covered ES5 (and I have
+provided a version of this assignment in ES5), you will most likely want to
+use ES6-style syntax.  It is the modern standard and is best practice for
+writing any future projects.  If you missed the lecture for whatever reason,
+go back and get the notes from a fellow student or watch the lecture video
+(if there is one available).
+
+This lab activity will introduce to a common Javascript design pattern, while
+also giving you practice in writing an Object Definition, and creating an NPM
+module (both main concepts of this week).
+
+*If you prefer to do this assignment in ES6 syntax, you can checkout the
+main branch via **git**.  From your terminal run*
+       
+       git checkout main
+
+
+Otherwise, go ahead and take a look at the **trackerService.js** file inside
+the **tracker** directory.  There have been some changes that should be
+reviewed.
+
+Primarily, the trackerService was turned into an Object Definition (in this
+case using prototype notation) and much of the logic that was in the driver/
+index.js in the previous lab was moved into the Object Definition.  This object
+represents a "tracker" or record of some activity (walking or running).  
+
+You'll also notice that the functions for calculating the calories burned while
+walking or running have been turned into function objects. This makes it easy
+to make references to them inside of the tracker definition.  You'll notice
+that the constructor sets the "exercise" property reference to one of them,
+depending on what string is passed in.  We'll call these the **exercise objects**
+
+This exposes a specific concept.  Consider the trackerService object.  The only
+thing that differentiates a walking trackerService and a running
+trackerService is that the number of calories burned by each is calculated
+with a different formula.
+
+This means that the trackerService object has some behavior (calculating
+calories burned) that is dependent upon data that it will not receive until
+it is created at execution time.  This idea is called **Dependency Injection**.
+When the object is created we "inject" it with some data (in this case, a
+string value representing the type of exercise) and it determines what
+function object it will need for calculations.  This concept will pop up again
+and again in javascript so we need to practice it now.
 
 The improvements made to the trackerService are good.  But the problem is we
-are not strictly following good OO design here.  The Strategy pattern
-implemented is actually dependent on some data we are recieving during
-construction.  It is a "State dependent" strategy. Further, we have to make
-sure that our current module  "knows" a lot about that state. For every
-exercise (formula) that we add, we have to use a new constructor for
-that function Object and we need a new if statement to see what kind of
-function Object we should create.
+are not strictly following good design here.  For every new exercise (formula)
+that we want to add, we first have to create a new exercise function object,
+then we need a new if statement to determine if a matching string has  been
+entered, and finally create the appropriate instance and assign it.   None of
+this has anything to do with recording the activity data.
 
-It would be better for us to *encapsulate* that state and strategy dependent
-behavior in its own module. That way we can simplify the code in trackerService
-to just make a regular constructor call. So that's what you are going to do!
+It would be better for us to *encapsulate* all of this exercise stuff into its
+own Exercise definition. That way we can simplify the code in trackerService
+to just make a constructor call to Exercise. Plus, if we ever wanted to, we
+could easily re-use the Exercise module. So that's what you are going to do!
 
 DIRECTIONS:
 
-1) First make a new local folder named Exercise
+1) First, create a new file inside the tracker folder named **Exercise.js**
+*We are going to make a module that contains two files: trackerService.js and
+Exercise.js.  This will help you understand how npm works*
 
-2) inside the Exercise folder create Exercise.js
-
-3)  Inside the file:
-    a) Copy the definitions for function objects walking and running into
-    Exercise.js
+2)  Open the new file in your VS Code Editor and then:  
+    *a) Copy the definitions for the exercise objects from trackerService.js
+    (lines 60-70, inclusive) into Exercise.js*
     
-    b) create a constructor that accepts a single parameter. This Exercise
-    Object should have a "type" and "exercise" member data.  Inside the
-    constructor, create an instance of walking or running, depending on
-    whether the parameter is "walking" or "running", and assign it to
-    exercise. Assign the string value to type.  Make an else branch
-    for throwing an error, if it is something other "walking" or "running".
-   
-    This is basically a copy of  the if/else Statement in trackerService.js
-    with a few modifications.
+    *b) create an Exercise object definition with a  constructor that accepts a
+    single parameter (see simpleObjects.js for an example).  This parameter
+    will be a String.*
+    **Note** this is separate from the exercise objects placed in this file  
+    
+    *c)  The Exercise module will have 2 instance properties. One will be named
+    **activity** and will reference one of the exercise function objects.*
+    **For Example:**
 
-    Note the hierarchical structure of the thrown error.  You can add different
-    log statements in each catch to help determine sources of errors when
-    debugging.
+    	  this.activity = new walking();  
+  
+    *The other will be named **type** and will hold the name of the activity.
+    Inside the constructor, check the string parameter's value.  If it is
+    "walking" create an instance of walking exercise object and assign it to
+    the activity instance property, if it is "running" create and assign an
+    instance of the running exercise object, else throw an error.  Finally,
+    create an instance  property named **type** (if you haven't already done so
+    ) and set its value to be the value of the parameter.*
 
-    c) create an Object prototype for this module.  the prototype is simple,
-    it should have a calculate function that accepts "weight" and "distance"
-    parameters and returns the value of running the specific exercise's
-    calculate function.
+    *Up to this point, you are  basically just moving the logic from
+    tracker constructor to the Exercise constructor*
 
-4)  Now you must make this into an NPM module.  Inside Exercise folder, run:
+    *d) Add a  function named **calculate** to the Exercise prototype.
+    The function accepts "weight" and "distance" parameters.  It will pass
+    these values to the object's activity's calculate function and returns
+    the value.*
 
-    npm init (you can use the default info to create a package.json file)
-    npm pack
+    This would be called by writing something like  
 
-5) Move into the tracker folder and run:
+    	 this.activity.calculate(weight, distance);
 
-    npm install "Path-to-your-Exercise-Folder" (something like ../Exercise)
+    e) export the Exercise  (VERY IMPORTANT)
 
-6) Inside the trackerService file:
+       module.exports = Exercise;
 
-   a) At the top, import the Exercise folder:
-   var Exercise = require("Exercise");
-   //if you don't npm install it, then you need to include the path to Exercise
+    f) save the file
 
-   b) In the constructor, get rid of the redundant if/else construct (it should
-   already be inside Exercise).  Instead, just set this.exercise to a new
-   instance of Exercise(type).  
+**3) Inside the trackerService file:**
 
+   *a) At the top, import the Exercise definition:*
+  
+    var Exercise = require("./Exercise.js");
+  
+   *b) In the tracker constructor, get rid of the redundant if/else branches
+   (We just moved these into Exercise).  Replace them with a call to create a
+   new instance of Exercise(type).*  
+  
     this.exercise = new Exercise(exercise);
 
 This should automatically assign the exercise and calculate method.
-You should leave the try catch statement alone.
+
+   You should leave the try catch statement alone.
    
-   c) you can remove the local definitions for walking and running.
+   *c) you can remove the local definitions for walking and running exercise
+   objects if you haven't already*
 
-   d) save and exit
+   *d) note that we are exporting the tracker from here.  if you read the
+   package.json file you'll notice that trackerService is the main file for
+   this module. Therefore whatever is exported from trackerService will be
+   made available whereever this is imported (not the Exercise).*
 
-7) Inside the tracker directory, run:
+   ***e) save the file!***
+   
+4) Look at the package.json file. this is the module metadata from its initial
+state.  Currently it should some version 0.1.2  Go ahead and change the
+version number to **0.1.3.**
 
-    npm pack
+*Then, run*
 
-then LOOK at the package.json file (cat package.json) and look at how npm
-has updated the "dependencies" member for us.  You can go in and change the
-version number to 0.1.3 if you'd like
+	npm pack
 
-8) Go into the ActivityTracker folder and run:
+This should create a new .tgz file (**tracker-0.1.3.tgz**).
 
-    npm install "Path_to_your_tracker_folder" (the actual path on your system)
+5) Go into the ActivityTracker folder and run:
 
-check to make sure it all works by running:
+      npm install ../tracker/tracker-0.1.3.tgz
 
-    node activityTracker.js  (from the ActivityTracker folder, in the terminal)
+check to make sure it all works by running (from within the ActivityTracker
+folder):
 
-As long as it works then you're basically done.  If it doesn't work, you may
-have to review these steps to make sure you've done everything here.
+		node activityTracker.js
+
+As long as it works then you're ready for the final step.
+If it doesn't work, you may have to review these steps to make sure you've done
+everything here.  Fix whatever is wrong, then re-pack the tracker module,
+and then re-install it into the ActivityTracker folder.
+
+**Notice**
+that the activityTracker.js file has more object literals to process AND the
+last object is a swimming object.  This version of the tracker cannot recognize
+swimming activities.  We'll fix this in the last step of the lab.
 
 By modularizing the Exercises, we've made it much easier to reuse them (DRY),
-made it easy to add more (extension) of them (open/closed), separated the
+made it easy to add more (extension) of them, separated the
 functionality of the tracker from the functionality of the calculation (SRP),
 and we abstracted/encapsulated the things that can change.  We can add as many
 "Exercises" to the program as we'd like, without ever having to change the
-trackerService file. Now Exercises can be "plugged in" elsewhere, if we need
+trackerService file. And Exercises can be "plugged in" elsewhere, if we need
 them.
 
-9) Now adding more types of activities is relatively easy. Currently the driver
+6) Now adding more types of activities is relatively easy. Currently the driver
 does not recognize "swimming". All we need is an else if branch in the
-exercise constructor, and a new Function Object for the appropriate calculation
-to fix this.
+Exercise constructor, and a new exercise function object for the
+appropriate calculation to fix this.
 
-Add a function Object named "swimming" the following formula:
+Add a function Object named "swimming" to the Exercise.js file. Use the
+following formula:  
 
     calories burned = (6 * Weight in KG * 3.5) / 200;
-
+  
 However, there is a slight problem. This formula only provides CALORIES BURNED
-PER MINUTE not total calories, unlike the other two formulae.
-To get the data we want, we need the time.
+PER MINUTE not total calories, unlike the other two formulae.  
+To get the data we want, we need the time.  
+  
+Since we also need all exercise function signatures to match, that means you  
+need all of the function objects  to accept three parameters (weight, distance,
+time).  
+In scenarios like this, it's ok to accept parameters that you will ignore.  
 
-Since we also need all exercise function signatures to match, that means you
-need all of them to accept three parameters (weight, distance, time).
-In scenarios like this, it's ok to accept parameters that you will ignore.
-
-So walking and running now need a time parameter at the end of their signatures
-No need to change their calculations.  And swimming should have matching
-signature. In the swimming calculation, you can ignore distance parameter and
-return total calories using time and the given formula.
+So walking and running now need a time parameter added to  the end of their
+parameter lists, but thats it. There is no need to change their calculations.
+And swimming should have matching signature. In the swimming calculation,
+you can ignore distance parameter and return total calories using time and the
+given formula.
 
 We can add other types of exercise similarly, though we won't always
 need to add a new parameter; the formula for swimming just happened to need
