@@ -76,8 +76,8 @@ Exercise.js.  This will help you understand how npm works*
     *c)  The Exercise class  will have 2 instance properties. One will be named
     **activity** and will reference one of the exercise function objects.*
     **For Example:**
-      
-	this.activity = new walking();  
+
+    	  this.activity = new walking();  
   
     *The other will be named **type** and will hold the name of the activity.
     Inside the constructor, check the string parameter's value.  If it is
