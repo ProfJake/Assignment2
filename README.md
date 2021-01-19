@@ -97,7 +97,7 @@ Exercise.js.  This will help you understand how npm works*
 
     This would be called by writing something like  
 
-       this.activity.calculate(weight, distance);
+     this.activity.calculate(weight, distance);
 
     e) save the file
 
