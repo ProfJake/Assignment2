@@ -77,7 +77,7 @@ Exercise.js.  This will help you understand how npm works*
     **activity** and will reference one of the exercise function objects.*
     **For Example:**
       
-     this.activity = new walking();  
+       this.activity = new walking();  
   
     *The other will be named **type** and will hold the name of the activity.
     Inside the constructor, check the string parameter's value.  If it is
@@ -97,7 +97,7 @@ Exercise.js.  This will help you understand how npm works*
 
     This would be called by writing something like  
 
-      this.activity.calculate(weight, distance);
+       this.activity.calculate(weight, distance);
 
     e) save the file
 
