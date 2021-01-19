@@ -14,7 +14,7 @@ module (both main concepts of this week).
 
 *If you prefer to do this assignment in ES5 syntax, you can checkout the
 master branch via **git**.  From your terminal run*
-
+       
        git checkout master
 
 
@@ -97,7 +97,7 @@ Exercise.js.  This will help you understand how npm works*
 
     This would be called by writing something like  
 
-     this.activity.calculate(weight, distance);
+      this.activity.calculate(weight, distance);
 
     e) save the file
 
