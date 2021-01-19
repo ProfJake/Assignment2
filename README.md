@@ -60,13 +60,12 @@ could easily re-use the Exercise class. So that's what you are going to do!
 
 DIRECTIONS:
 
-1) First make a new local folder named Exercise
+*1) First, create a new file inside the tracker folder named **Exercise.js**
+*We are going to make a module that contains two files: trackerService.js and
+Exercise.js.  This will help you understand how npm works*
 
-2) inside the Exercise folder create Exercise.js
-
-3)  Inside the file:
-    a) Copy the definitions for function objects walking and running into
-    Exercise.js
+2)  
+    a) Copy the definitions for the exercide 
     
     b) create a constructor that accepts a single parameter. This Exercise
     Object should have a "type" and "exercise" member data.  Inside the
