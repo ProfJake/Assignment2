@@ -64,7 +64,7 @@ DIRECTIONS:
 *We are going to make a module that contains two files: trackerService.js and
 Exercise.js.  This will help you understand how npm works*
 
-2)  Open the new file in your VS Code Editor and then:
+2)  Open the new file in your VS Code Editor and then:  
     *a) Copy the definitions for the exercise objects from trackerService.js
     (lines 60-70, inclusive) into Exercise.js*
     
