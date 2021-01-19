@@ -99,7 +99,11 @@ Exercise.js.  This will help you understand how npm works*
 
     	 this.activity.calculate(weight, distance);
 
-    e) save the file
+    e) export the Exercise class (VERY IMPORTANT)
+
+       module.exports = Exercise;
+
+    f) save the file
 
 **3) Inside the trackerService file:**
 
@@ -120,56 +124,74 @@ This should automatically assign the exercise and calculate method.
    *c) you can remove the local definitions for walking and running exercise
    objects if you haven't already*
 
-   ***d) save the file!***
+   *d) note that we are exporting the tracker from here.  if you read the
+   package.json file you'll notice that trackerService is the main file for
+   this module. Therefore whatever is exported from trackerService will be
+   made available whereever this is imported (not the Exercise).*
+
+   ***e) save the file!***
    
-7) Inside the tracker directory, run:
+4) Look at the package.json file. this is the module metadata from its initial
+state.  Currently it should some version 0.1.2  Go ahead and change the
+version number to **0.1.3.**
 
-    npm pack
+*Then, run*
 
-then LOOK at the package.json file (cat package.json) and look at how npm
-has updated the "dependencies" member for us.  You can go in and change the
-version number to 0.1.3 if you'd like
+	npm pack
 
-8) Go into the ActivityTracker folder and run:
+This should create a new .tgz file (**tracker-0.1.3.tgz**).
 
-    npm install "Path_to_your_tracker_folder"
+5) Go into the ActivityTracker folder and run:
 
-check to make sure it all works by running:
+      npm install ../tracker/tracker-0.1.3.tgz
 
-    node activityTracker.js
+check to make sure it all works by running (from within the ActivityTracker
+folder):
 
-As long as it works then you're basically done.  If it doesn't work, you may
-have to review these steps to make sure you've done everything here.
+		node activityTracker.js
+
+As long as it works then you're ready for the final step.
+If it doesn't work, you may have to review these steps to make sure you've done
+everything here.  Fix whatever is wrong, then re-pack the tracker module,
+and then re-install it into the ActivityTracker folder.
+
+**Notice**
+that the activityTracker.js file has more object literals to process AND the
+last object is a swimming object.  This version of the tracker cannot recognize
+swimming activities.  We'll fix this in the last step of the lab.
 
 By modularizing the Exercises, we've made it much easier to reuse them (DRY),
-made it easy to add more (extension) of them (open/closed), separated the
+made it easy to add more (extension) of them, separated the
 functionality of the tracker from the functionality of the calculation (SRP),
 and we abstracted/encapsulated the things that can change.  We can add as many
 "Exercises" to the program as we'd like, without ever having to change the
-trackerService file. Now Exercises can be "plugged in" elsewhere, if we need
+trackerService file. And Exercises can be "plugged in" elsewhere, if we need
 them.
 
-9) Now adding more types of activities is relatively easy. Currently the driver
+6) Now adding more types of activities is relatively easy. Currently the driver
 does not recognize "swimming". All we need is an else if branch in the
-exercise constructor, and a new Function Object for the appropriate calculation
-to fix this.
+Exercise class constructor, and a new exercise function object for the
+appropriate calculation to fix this.
 
-Add a function Object named "swimming" the following formula:
+Add a function Object named "swimming" to the Exercise.js file. Use the
+following formula:  
 
     calories burned = (6 * Weight in KG * 3.5) / 200;
-
+  
 However, there is a slight problem. This formula only provides CALORIES BURNED
-PER MINUTE not total calories, unlike the other two formulae.
-To get the data we want, we need the time.
+PER MINUTE not total calories, unlike the other two formulae.  
+To get the data we want, we need the time.  
+  
+Since we also need all exercise function signatures to match, that means you  
+need all of the function objects  to accept three parameters (weight, distance,
+time).  
+In scenarios like this, it's ok to accept parameters that you will ignore.  
 
-Since we also need all exercise function signatures to match, that means you
-need all of them to accept three parameters (weight, distance, time).
-In scenarios like this, it's ok to accept parameters that you will ignore.
-
-So walking and running now need a time parameter at the end of their signatures
-No need to change their calculations.  And swimming should have matching
-signature. In the swimming calculation, you can ignore distance parameter and
-return total calories using time and the given formula.
+So walking and running now need a time parameter added to  the end of their
+parameter lists, but thats it. There is no need to change their calculations.
+And swimming should have matching signature. In the swimming calculation,
+you can ignore distance parameter and return total calories using time and the
+given formula.
 
 We can add other types of exercise similarly, though we won't always
 need to add a new parameter; the formula for swimming just happened to need
