@@ -8,20 +8,55 @@ writing any future projects.  If you missed the lecture for whatever reason,
 go back and get the notes from a fellow student or watch the lecture video
 (if there is one available).
 
+This lab activity will introduce to a common Javascript design pattern, while
+also giving you practice in writing an Object Definition, and creating an NPM
+module (both main concepts of this week).
 
+*If you prefer to do this assignment in ES5 syntax, you can checkout the
+master branch via **git**.  From your terminal run*
+
+       git checkout master
+
+
+Otherwise, go ahead and take a look at the **trackerService.js** file inside
+the **tracker** directory.  There have been some changes that should be
+reviewed.
+
+Primarily, the trackerService was turned into an Object Definition (in this
+case using class notation) and much of the logic that was done in the driver/
+index.js in the previous lab was moved into the Object Definition.  This object
+represents a "tracker" or record of some activity (walking or running).  
+
+You'll also notice that the functions for calculating the calories burned while
+walking or running have been turned into function objects. This makes it easy
+to make references to them inside of the tracker definition.  You'll notice
+that the constructor sets the "exercise" property reference to one of them,
+depending on what string is passed in.  We'll call these the **exercise objects**
+
+This exposes a specific concept.  Consider the trackerService object.  The only
+thing that differentiates a walking trackerService and a running
+trackerService is that the number of calories burned by each is calculated
+with a different formula.
+
+This means that the trackerService object has some behavior (calculating
+calories burned) that is dependent upon data that it will not receive until
+it is created at execution time.  This idea is called **Dependency Injection**.
+When the object is created we "inject" it with some data (in this case, a
+string value representing the type of exercise) and it determines what
+function object it will need for calculations.  This concept will pop up again
+and again in javascript so we need to practice it now.
 
 The improvements made to the trackerService are good.  But the problem is we
-are not strictly following good OO design here.  The Strategy pattern
-implemented is actually dependent on some data we are recieving during
-construction.  It is a "State dependent" strategy. Further, we have to make
-sure that our current module  "knows" a lot about that state. For every
-exercise (formula) that we add, we have to use a new constructor for
-that function Object and we need a new if statement to see what kind of
-function Object we should create.
+are not strictly following good design here.  For every new exercise (formula)
+that we want to add, we first have to create a new exercise object, then we
+need a new if statement to determine what string might have been entered,
+and choose the appropriate object to assign.  None of this has anything to do
+with recording the metadata of the activity.
 
-It would be better for us to *encapsulate* that state and strategy dependent
-behavior in its own module. That way we can simplify the code in trackerService
-to just make a regular constructor call. So that's what you are going to do!
+It would be better for us to *encapsulate* all of this exercise stuff into its
+own Exercise class. That way we can simplify the code in trackerService
+to just make a regular constructor call. Plus, if we ever wanted to, we could
+easily re-use the Exercise class. So that's what you are going to do!
 
 DIRECTIONS:
 
