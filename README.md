@@ -48,15 +48,15 @@ and again in javascript so we need to practice it now.
 
 The improvements made to the trackerService are good.  But the problem is we
 are not strictly following good design here.  For every new exercise (formula)
-that we want to add, we first have to create a new exercise object, then we
-need a new if statement to determine what string might have been entered,
-and choose the appropriate object to assign.  None of this has anything to do
-with recording the metadata of the activity.
+that we want to add, we first have to create a new exercise function object,
+then we need a new if statement to determine if a matching string has  been
+entered, and finally create the appropriate instance and assign it.   None of
+this has anything to do with recording the activity data.
 
 It would be better for us to *encapsulate* all of this exercise stuff into its
 own Exercise class. That way we can simplify the code in trackerService
-to just make a regular constructor call. Plus, if we ever wanted to, we could
-easily re-use the Exercise class. So that's what you are going to do!
+to just make a constructor call to Exercise. Plus, if we ever wanted to, we
+could easily re-use the Exercise class. So that's what you are going to do!
 
 DIRECTIONS:
 
