@@ -60,59 +60,68 @@ could easily re-use the Exercise class. So that's what you are going to do!
 
 DIRECTIONS:
 
-*1) First, create a new file inside the tracker folder named **Exercise.js**
+1) First, create a new file inside the tracker folder named **Exercise.js**
 *We are going to make a module that contains two files: trackerService.js and
 Exercise.js.  This will help you understand how npm works*
 
-2)  
-    a) Copy the definitions for the exercide 
+2)  Open the new file in your VS Code Editor and then:
+    *a) Copy the definitions for the exercise objects from trackerService.js
+    (lines 60-70, inclusive) into Exercise.js*
     
-    b) create a constructor that accepts a single parameter. This Exercise
-    Object should have a "type" and "exercise" member data.  Inside the
-    constructor, create an instance of walking or running, depending on
-    whether the parameter is "walking" or "running", and assign it to
-    exercise. Assign the string value to type.  Make an else branch
-    for throwing an error, if it is something other "walking" or "running".
-   
-    This is basically a copy of  the if/else Statement in trackerService.js
-    with a few modifications.
+    *b) create a tracker Class definition with a  constructor that accepts a
+    single parameter (see simpleObjects.js for an example).  This parameter
+    will be a String.*
+    **Note** this is separate from the exercise objects placed in this file  
+    
+    *c)  The Exercise class  will have 2 instance properties. One will be named
+    **activity** and will reference one of the exercise function objects.*
+    **For Example:**
+      
+     this.activity = new walking();  
+  
+    *The other will be named **type** and will hold the name of the activity.
+    Inside the constructor, check the string parameter's value.  If it is
+    "walking" create an instance of walking exercise object and assign it to
+    the activity instance property, if it is "running" create and assign an
+    instance of the running exercise object, else throw an error.  Finally,
+    create an instance  property named **type** (if you haven't already done so
+    ) and set its value to be the value of the parameter.*
 
-    Note the hierarchical structure of the thrown error.  You can add different
-    log statements in each catch to help determine sources of errors when
-    debugging.
+    *Up to this point, you are  basically just moving the logic from
+    tracker constructor to the Exercise constructor*
 
-    c) create an Object prototype for this module.  the prototype is simple,
-    it should have a calculate function that accepts "weight" and "distance"
-    parameters and returns the value of running the specific exercise's
-    calculate function.
-4)  Now you must make this into an NPM module.  Inside Exercise folder, run:
+    *d) Add a  function named **calculate** to the Exercise class.
+    The function accepts "weight" and "distance" parameters.  It will pass
+    these values to the object's activity's calculate function and returns
+    the value.*
 
-    npm pack
+    This would be called by writing something like  
 
-5) Move into the tracker folder and run:
+     this.activity.calculate(weight, distance);
 
-    npm install "Path-to-your-Exercise-Folder" (something like ../Exercise)
+    e) save the file
 
-6) Inside the trackerService file:
+**3) Inside the trackerService file:**
 
-   a) At the top, import the Exercise folder:
-
-    var Exercise = require("Exercise");
-   //if you don't npm install it, then you need to include the path to Exercise
-
-   b) In the constructor, get rid of the redundant if/else construct (it should
-   already be inside Exercise).  Instead, just set this.exercise to a new
-   instance of Exercise(type).  
-
+   *a) At the top, import the Exercise definition:*
+  
+    var Exercise = require("./Exercise.js");
+  
+   *b) In the tracker constructor, get rid of the redundant if/else branches
+   (We just moved these into Exercise).  Replace them with a call to create a
+   new instance of Exercise(type).*  
+  
     this.exercise = new Exercise(exercise);
 
 This should automatically assign the exercise and calculate method.
 
    You should leave the try catch statement alone.
    
-   c) you can remove the local definitions for walking and running.
+   *c) you can remove the local definitions for walking and running exercise
+   objects if you haven't already*
 
-   d) save and exit
+   ***d) save the file!***
+   
 7) Inside the tracker directory, run:
 
     npm pack
