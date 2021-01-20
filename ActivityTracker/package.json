@@ -1,0 +1,15 @@
+{
+  "name": "activitytracker",
+  "version": "1.0.0",
+  "description": "ES5 version of Lab 2",
+  "main": "activityTracker.js",
+  "dependencies": {
+    "tracker": "file:../tracker/tracker-0.1.2.tgz"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jake Levy",
+  "license": "ISC"
+}
